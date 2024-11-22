@@ -188,7 +188,7 @@
             margin-right: 4px;
         }
 
-        #addTeamBtn {
+        #addTeamBtn, #clearAllTicketsBtn {
             margin: 8px;
             padding: 6px;
             background: #3498db;
@@ -196,6 +196,10 @@
             border: none;
             border-radius: 4px;
             cursor: pointer;
+        }
+
+        #clearAllTicketsBtn {
+            background: #e74c3c;
         }
 
         .ticket h3 {
@@ -279,6 +283,7 @@
     </div>
 
     <button id="addTeamBtn" onclick="addTeam()">Add New Team</button>
+    <button id="clearAllTicketsBtn" onclick="clearAllTickets()">Clear All Orders</button>
 
     <script>
         let teams = [];
@@ -393,6 +398,15 @@
         function addTeam() {
             const teamNumber = teams.length + 1;
             initializeTeam(`Team ${teamNumber}`);
+        }
+
+        function clearAllTickets() {
+            teams.forEach(team => {
+                const row = document.getElementById(`${team.name.replace(/\s+/g, '')}Row`);
+                if (row) {
+                    row.innerHTML = '';
+                }
+            });
         }
 
         function addOrder(team, dish) {
